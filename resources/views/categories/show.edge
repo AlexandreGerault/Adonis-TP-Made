@@ -1,0 +1,31 @@
+@layout("layout")
+
+@section('title')
+  Liste des projets {{ category.name }}
+@endsection
+
+@section('body')
+    <h1>Projets {{ category.name }}</h1>
+    <div class="row">
+    @each(project in projects.rows)
+        <div class="col s12 m6">
+            <div class="card horizontal">
+                <div class="card-image">
+                    <img src="/uploads/projects/{{ project.picture_url }}">
+                </div>
+                <div class="card-stacked">
+                    <div class="card-content">
+                        <div class="card-title">
+                            {{ project.name }}
+                        </div>
+                        {{ project.description }}
+                    </div>
+                    <div class="card-action">
+                        <a href="/projects/{{ project.id }}">Voir ce TP</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    @endeach
+    </div>
+@endsection
