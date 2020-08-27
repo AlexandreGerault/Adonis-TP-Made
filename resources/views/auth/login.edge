@@ -1,0 +1,29 @@
+@layout("layout")
+
+@section('title')
+Connectez-vous !
+@endsection
+
+@section('body')
+<div class="card">
+    <form method="POST" class="card-stacked">
+        <div class="card-content">
+            <div>
+                <h2 class="header">Connexion</h2>
+            </div>
+            {{ csrfField() }}
+            <div>
+                <label for="emailInput">Votre adresse de connexion</label>
+                <input type="email" name="email" id="emailInput" />
+            </div>
+
+            <div>
+                <label for="passwordInput">Votre mot de passe</label>
+                <input type="password" name="password" id="passwordInput" />
+            </div>
+            <button class="mt-4 btn">Se connecter</button>
+        </div>
+    </form>
+</div>
+
+@endsection
