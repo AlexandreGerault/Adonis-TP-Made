@@ -16,6 +16,15 @@
     @endsection
     @section('scripts')
     {{ script('app') }}
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            let elems = document.querySelectorAll('.dropdown-trigger');
+            let instances = M.Dropdown.init(elems, {
+                hover: true,
+                coverTrigger: false
+            });
+        });
+    </script>
     @endsection
 </head>
 <body>
@@ -25,12 +34,9 @@
             <ul id="nav-mobile" class="right hide-on-med-and-down">
                 <li><a class='dropdown-trigger' href='#' data-target='categories-dropdown'>Catégories</a></li>.
                 <ul id='categories-dropdown' class='dropdown-content'>
-                    <li><a href="#!">one</a></li>
-                    <li><a href="#!">two</a></li>
-                    <li class="divider" tabindex="-1"></li>
-                    <li><a href="#!">three</a></li>
-                    <li><a href="#!"><i class="material-icons">view_module</i>four</a></li>
-                    <li><a href="#!"><i class="material-icons">cloud</i>five</a></li>
+                    @each(category in gCat().rows)
+                        <li><a href="/category/{{ category.id }}">{{ category.name }}</a></li>
+                    @endeach
                   </ul>
                 <li><a href="/projects">Derniers TP</a></li>
                 @loggedIn

@@ -24,4 +24,3 @@ hooks.before.providersBooted(() => {
     
     Validator.extend('exists', existsFn)
 })
-
