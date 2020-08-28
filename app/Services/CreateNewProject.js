@@ -2,7 +2,6 @@
 
 const Project = use('App/Models/Project')
 const ProjectCategory = use('App/Models/ProjectCategory')
-const Logger = use('Logger')
 const Helpers = use('Helpers')
 
 class CreateNewProject {
@@ -18,8 +17,6 @@ class CreateNewProject {
             name: data.projectName + '.' + image.extname,
             overwrite: true
         })
-
-        Logger.info(image)
 
         if (!image.moved) {
             return image.error()
