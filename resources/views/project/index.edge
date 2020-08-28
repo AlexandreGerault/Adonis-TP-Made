@@ -19,7 +19,7 @@
                         <div class="card-title">
                             {{ project.name }}
                         </div>
-                        {{ project.description }}
+                        {{{ project.description }}}
                     </div>
                     <div class="card-action">
                         <a href="/projects/{{ project.id }}">Voir ce TP</a>
@@ -29,7 +29,7 @@
         </div>
         @endeach
     </div>
-    @if(projects.pages.total > 1)
+    @if(projects.pages.lastPage > 1)
     @!component('components/pagination', {
         pages: projects.pages
     })

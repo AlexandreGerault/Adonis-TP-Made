@@ -34,7 +34,7 @@ class ProjectCategoryController {
         const category = await Category.query().with('projects').where('id', params.id).first()
         const projects = category.getRelated('projects')
 
-        return view.render('categories.show', { category, projects })
+        return view.presenter('ProjectsListPresenter').render('categories.show', { category, projects })
     }
 }
 
