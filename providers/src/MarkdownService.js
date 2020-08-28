@@ -8,7 +8,7 @@ class MarkdownService {
     }
 
     toHtml (markdownString) {
-        return this.marked(this.sanitize(markdownString))
+        return this.sanitize(this.marked(markdownString))
     }
 }
 
