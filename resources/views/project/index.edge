@@ -29,4 +29,9 @@
         </div>
         @endeach
     </div>
+    @if(projects.pages.total > 1)
+    @!component('components/pagination', {
+        pages: projects.pages
+    })
+    @endif
 @endsection

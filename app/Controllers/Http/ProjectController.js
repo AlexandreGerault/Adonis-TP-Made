@@ -7,6 +7,7 @@
 const Project = use('App/Models/Project')
 const ProjectCategory = use('App/Models/ProjectCategory')
 const CreateNewProject = use('App/Services/CreateNewProject')
+const Logger = use('Logger')
 
 /**
  * Resourceful controller for interacting with projects
@@ -23,7 +24,7 @@ class ProjectController {
      */
     async index({ request, response, view }) {
         const { page } = request.get('page', 1)
-        const projects = await Project.query().paginate(page, 10)
+        const projects = await Project.query().paginate(page, 5)
         return view.render('project.index', { projects })
     }
 

@@ -4,6 +4,16 @@
 Créez votre propre TP
 @endsection
 
+@section('scripts')
+@super
+<script defer>
+    document.addEventListener('DOMContentLoaded', function() {
+        var elems = document.querySelectorAll('select');
+        var instances = M.FormSelect.init(elems, {});
+        });
+</script>
+@endsection
+
 @section('body')
 <form method="post" action="/projects" enctype="multipart/form-data">
     {{ csrfField() }}
@@ -12,13 +22,13 @@ Créez votre propre TP
         <input type="text" name="projectName" id="nameInput" />
     </div>
 
-    <div>
-        <label for="typeInput">Type de projet</label>
+    <div class="input-field">
         <select name="projectType" id="typeInput">
             @each(category in categories)
                 <option value="{{ category.id }}">{{ category.name }}</option>
             @endeach
         </select>
+        <label for="typeInput">Type de projet</label>
     </div>
 
     <div>
@@ -26,14 +36,14 @@ Créez votre propre TP
         <input type="url" name="designUrl" id="designInput" />
     </div>
 
-    <div>
+    <div class="input-field">
+        <textarea name="description" id="descriptionInput" cols="30" rows="10" class="materialize-textarea"></textarea>
         <label for="descriptionInput">Description du TP</label>
-        <textarea name="description" id="descriptionInput" cols="30" rows="10"></textarea>
     </div>
 
-    <div>
+    <div class="input-field">
+        <textarea name="rules" id="rulesInput" cols="30" rows="10" class="materialize-textarea"></textarea>
         <label for="rulesInput">Règles du TP</label>
-        <textarea name="rules" id="rulesInput" cols="30" rows="10"></textarea>
     </div>
 
     <div>
