@@ -20,3 +20,4 @@ database/*.sqlite
 .idea
 
 .gitignore
+.editorconfig
