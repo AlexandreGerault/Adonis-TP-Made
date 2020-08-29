@@ -1,7 +1,6 @@
 'use strict'
 
 const Project = use('App/Models/Project')
-const Logger = use('Logger')
 
 class UpdateProject {
     async authorize() {

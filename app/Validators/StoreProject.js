@@ -3,7 +3,7 @@
 class StoreProject {
     async authorize() {
         if (this.ctx.guard.denies('create')) {
-            return redirect('back')
+            return this.ctx.response.redirect('back')
         }
         return true
     }
