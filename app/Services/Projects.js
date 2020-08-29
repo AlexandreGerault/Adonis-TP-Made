@@ -1,10 +1,10 @@
 'use strict'
 
 class Projects {
-    constructor (Project, ProjectCategory, Helper) {
+    constructor (Project, ProjectCategory, Helpers) {
         this.Project = Project
         this.ProjectCategory = ProjectCategory
-        this.Helper = Helper
+        this.Helpers = Helpers
     }
 
     async createFromRequest({request, auth }) {
