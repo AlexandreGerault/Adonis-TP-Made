@@ -1,12 +1,15 @@
 'use strict'
 
+const Projects = require('../../Services/Projects')
+
 /** @typedef {import('@adonisjs/framework/src/Request')} Request */
 /** @typedef {import('@adonisjs/framework/src/Response')} Response */
 /** @typedef {import('@adonisjs/framework/src/View')} View */
 
+
+const ProjectService = use('ProjectService')
 const Project = use('App/Models/Project')
 const ProjectCategory = use('App/Models/ProjectCategory')
-const CreateNewProject = use('App/Services/CreateNewProject')
 const Logger = use('Logger')
 
 /**
@@ -22,7 +25,7 @@ class ProjectController {
      * @param {Response} ctx.response
      * @param {View} ctx.view
      */
-    async index({ request, response, view }) {
+    async index({ request, view }) {
         const { page } = request.get('page', 1)
         const projects = await Project.query().paginate(page, 5)
         return view.presenter('ProjectsListPresenter').render('project.index', { projects })
@@ -54,7 +57,7 @@ class ProjectController {
      * @param {Response} ctx.response
      */
     async store({ request, auth, response }) {
-        const project = await CreateNewProject.createFromRequest({ request, auth })
+        const project = await ProjectService.createFromRequest({ request, auth })
 
         return response.redirect('/projects/' + project.id)
     }
@@ -83,7 +86,11 @@ class ProjectController {
      * @param {Response} ctx.response
      * @param {View} ctx.view
      */
-    async edit({ params, request, response, view }) {}
+    async edit({ params, request, response, view }) {
+        const project = await Project.findOrFail(params.id)
+
+        return view.render('project.edit', { project })
+    }
 
     /**
      * Update project details.
@@ -93,7 +100,11 @@ class ProjectController {
      * @param {Request} ctx.request
      * @param {Response} ctx.response
      */
-    async update({ params, request, response }) {}
+    async update({ params, request, response }) {
+        // const project = await UpdateExistingProject.updateFromRequest(request.except(['_csrf']), await Project.findOrFail(params.id))
+        
+        return response.redirect('/projects/' + project.id)
+    }
 
     /**
      * Delete a project with id.

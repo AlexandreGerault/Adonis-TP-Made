@@ -26,7 +26,6 @@ class Provider extends ServiceProvider {
      * @return {void}
      */
     async boot() {
-        const Logger = use('Logger')
         const View = use('View')
         const edge = use('edge.js')
         const ProjectCategory = use('App/Models/ProjectCategory')
