@@ -11,7 +11,7 @@
                 <i class="material-icons">chevron_left</i>
             </a>
         </li>
-        @each(i in range(1, pages.total + 1))
+        @each(i in range(1, pages.lastPage + 1))
             <li><a href="/projects?page={{ i }}">{{ i }}</a></li>
         @endeach
         <li
