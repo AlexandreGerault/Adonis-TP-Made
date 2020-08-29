@@ -1,10 +1,9 @@
 'use strict'
+const Logger = use('Logger')
+const Project = use('App/Models/Project')
 
 class StoreProject {
     async authorize() {
-        if (this.ctx.guard.denies('create')) {
-            return this.ctx.response.redirect('back')
-        }
         return true
     }
 

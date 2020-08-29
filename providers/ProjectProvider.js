@@ -15,8 +15,9 @@ class ProjectProvider extends ServiceProvider {
         this.app.singleton('ProjectService', () => {
             const Project = use('App/Models/Project')
             const ProjectCategory = use('App/Models/ProjectCategory')
+            const Helper = use('Helper')
 
-            return new Projects(Project, ProjectCategory)
+            return new Projects(Project, ProjectCategory, Helper)
         })
     }
 

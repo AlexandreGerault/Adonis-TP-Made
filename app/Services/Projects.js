@@ -1,9 +1,10 @@
 'use strict'
 
 class Projects {
-    constructor (Project, ProjectCategory) {
+    constructor (Project, ProjectCategory, Helper) {
         this.Project = Project
         this.ProjectCategory = ProjectCategory
+        this.Helper = Helper
     }
 
     async createFromRequest({request, auth }) {
@@ -16,7 +17,7 @@ class Projects {
         const project = new this.Project()
 
         if (image) {
-            await image.move(Helpers.publicPath('uploads/projects/'), {
+            await image.move(this.Helpers.publicPath('uploads/projects/'), {
                 name: data.projectName + '.' + image.extname,
                 overwrite: true
             })
