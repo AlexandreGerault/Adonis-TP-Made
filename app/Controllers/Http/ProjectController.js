@@ -26,7 +26,7 @@ class ProjectController {
      */
     async index({ request, view }) {
         const { page } = request.get('page', 1)
-        const projects = await Project.query().paginate(page, 5)
+        const projects = await Project.query().with('author').paginate(page, 5)
         return view.presenter('ProjectsListPresenter').render('project.index', { projects })
     }
 

@@ -1,7 +1,9 @@
 <div class="card horizontal">
+    @if(project.picture_url)
     <div class="card-image">
         <img src="/uploads/projects/{{ project.picture_url }}">
-    </div>
+    </div>      
+    @endif
     <div class="card-stacked">
         <div class="card-content">
             <div class="card-title">
@@ -11,9 +13,9 @@
         </div>
         <div class="card-action">
             <a href="/projects/{{ project.id }}">Voir</a>
-            @if(project.author.id === auth.user.id)
+            @can('update', project)
             <a href="/projects/{{ project.id }}/edit">Éditer</a>
-            @endif
+            @endcan
         </div>
     </div>
 </div>

@@ -42,7 +42,7 @@
         <div class="nav-wrapper">
             <a href="#" class="brand-logo">Made</a>
             <ul id="nav-mobile" class="right hide-on-med-and-down">
-                <li><a class='dropdown-trigger' href='#' data-target='categories-dropdown'>Catégories</a></li>.
+                <li><a class='dropdown-trigger' href='#' data-target='categories-dropdown'>Catégories</a></li>
                 <ul id='categories-dropdown' class='dropdown-content'>
                     @each(category in gCat().rows)
                         <li><a href="/category/{{ category.id }}">{{ category.name }}</a></li>
@@ -57,7 +57,6 @@
                     <li><a href="/register">Inscription</a></li>
                     <li><a href="/login">Connexion</a></li>
                 @endloggedIn
-                
             </ul>
         </div>
       </nav>
