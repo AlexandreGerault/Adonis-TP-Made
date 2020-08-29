@@ -10,7 +10,7 @@
     <div class="row">
         @each(project in projects.rows)
         <div class="col s12 m6">
-            @!component('components.project.card', { project, auth, guard })
+            @!component('components.project.card', { project, guard })
         </div>
         @endeach
     </div>

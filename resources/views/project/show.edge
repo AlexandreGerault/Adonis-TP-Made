@@ -12,12 +12,13 @@
             {{ project.name }}
             <span class="badge"><a href="/category/{{ category.id }}">{{ category.name }}</a></span>
         </h2>
+        @can('update', project)
+        <a href="/projects/{{ project.id }}/edit" class="btn">Éditer le TP</a>
+        @endcan
+        <p>
+            Créé par {{ author.username }}
+        </p>
     </header>
-
-
-    <p>
-        Créé par {{ author.username }}
-    </p>
 
     <!-- Resources -->
     @if(project.design_link)
