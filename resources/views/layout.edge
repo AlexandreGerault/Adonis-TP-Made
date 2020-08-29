@@ -4,8 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <!-- Materialize assets -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <!------------------------>
+
+    <!-- Markdown editor -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css">
+    <script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
+    <!--------------------->
+
     <title>
         @section('title')
         Made - La plateforme de TP en ligne
@@ -15,32 +25,37 @@
     {{ style('app') }}
     @endsection
     @section('scripts')
-    {{ script('app') }}
+    
+    <script defer>
+        document.addEventListener('DOMContentLoaded', function() {
+            let elems = document.querySelectorAll('.dropdown-trigger');
+            let instances = M.Dropdown.init(elems, {
+                hover: true,
+                coverTrigger: false
+            });
+        });
+    </script>
     @endsection
 </head>
 <body>
     <nav>
         <div class="nav-wrapper">
-            <a href="#" class="brand-logo">Made</a>
+            <a href="/" class="brand-logo">Made</a>
             <ul id="nav-mobile" class="right hide-on-med-and-down">
-                <li><a class='dropdown-trigger' href='#' data-target='categories-dropdown'>Catégories</a></li>.
+                <li><a class='dropdown-trigger' href='#' data-target='categories-dropdown'>Catégories</a></li>
                 <ul id='categories-dropdown' class='dropdown-content'>
-                    <li><a href="#!">one</a></li>
-                    <li><a href="#!">two</a></li>
-                    <li class="divider" tabindex="-1"></li>
-                    <li><a href="#!">three</a></li>
-                    <li><a href="#!"><i class="material-icons">view_module</i>four</a></li>
-                    <li><a href="#!"><i class="material-icons">cloud</i>five</a></li>
+                    @each(category in gCat().rows)
+                        <li><a href="/category/{{ category.id }}">{{ category.name }}</a></li>
+                    @endeach
                   </ul>
                 <li><a href="/projects">Derniers TP</a></li>
                 @loggedIn
-                    <li><a href="#">Mes TP</a></li>
+                    <li><a href="/projects/create">Créer un nouveau TP</a></li>
                     <li><a href="/logout">Déconnexion</a></li>
                 @else
                     <li><a href="/register">Inscription</a></li>
                     <li><a href="/login">Connexion</a></li>
                 @endloggedIn
-                
             </ul>
         </div>
       </nav>

@@ -25,7 +25,13 @@ class Provider extends ServiceProvider {
      *
      * @return {void}
      */
-    boot() {
+    async boot() {
+        const View = use('View')
+        const edge = use('edge.js')
+        const ProjectCategory = use('App/Models/ProjectCategory')
+        const globalCategories = await ProjectCategory.all()
+    
+        View.global('gCat', () => globalCategories)
         edge.registerPresenters(Helpers.resourcesPath('presenters'))
     }
 }

@@ -8,7 +8,13 @@ class MarkdownService {
     }
 
     toHtml (markdownString) {
-        return this.marked(this.sanitize(markdownString))
+        return this.sanitize(this.marked(markdownString))
+    }
+
+    noHeading(inputString) {
+        return this.sanitize(inputString, {
+            allowedTags: [ 'b', 'i', 'em', 'strong', 'a' ]
+        })
     }
 }
 

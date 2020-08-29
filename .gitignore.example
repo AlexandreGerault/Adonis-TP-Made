@@ -1,9 +1,6 @@
 # Node modules
 node_modules
 package-lock.json
-ace
-adonis
-.jsbeautifyrc
 
 # Adonis directory for storing tmp files
 tmp
@@ -20,4 +17,3 @@ database/*.sqlite
 .idea
 
 .gitignore
-.editorconfig

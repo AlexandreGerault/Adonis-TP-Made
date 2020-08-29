@@ -1,0 +1,22 @@
+@layout("layout")
+
+@section('title')
+    Derniers TP mis en ligne sur Made
+@endsection
+
+@section('body')
+    <h1>Derniers TP mis en ligne</h1>
+
+    <div class="row">
+        @each(project in projects.rows)
+        <div class="col s12 m6">
+            @!component('components.project.card', { project, guard })
+        </div>
+        @endeach
+    </div>
+    @if(projects.pages.lastPage > 1)
+    @!component('components/pagination', {
+        pages: projects.pages
+    })
+    @endif
+@endsection
