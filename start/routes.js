@@ -37,8 +37,9 @@ Route.get('/projects', 'ProjectController.index').as('projects.index')
 Route.get('/projects/create', 'ProjectController.create').as('projects.create').middleware('auth')
 Route.get('/projects/:id/edit', 'ProjectController.edit').as('projects.edit').middleware('auth')
 Route.get('/projects/:id', 'ProjectController.show').as('projects.show')
-Route.put('/projects/:id', 'ProjectController.update').as('projects.update').middleware('auth')
+Route.put('/projects/:id', 'ProjectController.update').as('projects.update').validator('UpdateProject').middleware('auth')
 Route.post('/projects', 'ProjectController.store').as('projects.store').validator('StoreProject').middleware('auth')
+
 /**
  * Category routes
  */

@@ -10,7 +10,6 @@ const Projects = require('../../Services/Projects')
 const ProjectService = use('ProjectService')
 const Project = use('App/Models/Project')
 const ProjectCategory = use('App/Models/ProjectCategory')
-const Logger = use('Logger')
 
 /**
  * Resourceful controller for interacting with projects
@@ -71,8 +70,11 @@ class ProjectController {
      * @param {Response} ctx.response
      * @param {View} ctx.view
      */
-    async show({ params, view }) {
+    async show({ params, guard, view }) {
         const project = await Project.query().with('author').with('category').where('id', params.id).first()
+        if (guard.denies('show', project)) {
+            return redirect('back')
+        }
 
         return view.presenter('ShowProjectPresenter').render('project.show', {project})
     }
@@ -86,8 +88,12 @@ class ProjectController {
      * @param {Response} ctx.response
      * @param {View} ctx.view
      */
-    async edit({ params, request, response, view }) {
+    async edit({ params, guard, response, view }) {
         const project = await Project.findOrFail(params.id)
+
+        if (guard.denies('update', project)) {
+            return response.redirect('back')
+        }
 
         return view.render('project.edit', { project })
     }
@@ -101,7 +107,7 @@ class ProjectController {
      * @param {Response} ctx.response
      */
     async update({ params, request, response }) {
-        // const project = await UpdateExistingProject.updateFromRequest(request.except(['_csrf']), await Project.findOrFail(params.id))
+        const project = await ProjectService.updateFromRequest({ request, project: await Project.findOrFail(params.id) })
         
         return response.redirect('/projects/' + project.id)
     }

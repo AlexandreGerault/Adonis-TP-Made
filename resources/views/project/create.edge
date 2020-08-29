@@ -8,9 +8,14 @@ Créez votre propre TP
 @super
 <script defer>
     document.addEventListener('DOMContentLoaded', function() {
-        var elems = document.querySelectorAll('select');
-        var instances = M.FormSelect.init(elems, {});
-        });
+        var elems = document.querySelectorAll('select')
+        var instances = M.FormSelect.init(elems, {})
+
+        var simplemde = new SimpleMDE({ element: document.getElementById("descriptionInput") })
+        var simplemde = new SimpleMDE({ element: document.getElementById("rulesInput") })
+    });
+
+
 </script>
 @endsection
 
@@ -37,13 +42,13 @@ Créez votre propre TP
     </div>
 
     <div class="input-field">
+        <label for="descriptionInput" class="label-relative">Description du TP</label>
         <textarea name="description" id="descriptionInput" cols="30" rows="10" class="materialize-textarea"></textarea>
-        <label for="descriptionInput">Description du TP</label>
     </div>
 
     <div class="input-field">
+        <label for="rulesInput" class="label-relative">Règles du TP</label>
         <textarea name="rules" id="rulesInput" cols="30" rows="10" class="materialize-textarea"></textarea>
-        <label for="rulesInput">Règles du TP</label>
     </div>
 
     <div>

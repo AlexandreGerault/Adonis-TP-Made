@@ -40,6 +40,19 @@ class Projects {
     }
 
     async updateFromRequest({ request, project }) {
+        const data = request.except(['_csrf', '_method'])
+        const category = await this.ProjectCategory.findOrFail(parseInt(data.projectType))
+
+        project.merge({
+            name: data.projectName,
+            design_link: data.designUrl,
+            description: data.description,
+            rules: data.rules
+        })
+        await project.save()
+        project.category().associate(category)
+
+        return project
     }
 }
 

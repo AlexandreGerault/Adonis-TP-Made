@@ -1,0 +1,19 @@
+<div class="card horizontal">
+    <div class="card-image">
+        <img src="/uploads/projects/{{ project.picture_url }}">
+    </div>
+    <div class="card-stacked">
+        <div class="card-content">
+            <div class="card-title">
+                {{ project.name }}
+            </div>
+            {{{ project.description }}}
+        </div>
+        <div class="card-action">
+            <a href="/projects/{{ project.id }}">Voir</a>
+            @if(project.author.id === auth.user.id)
+            <a href="/projects/{{ project.id }}/edit">Éditer</a>
+            @endif
+        </div>
+    </div>
+</div>
