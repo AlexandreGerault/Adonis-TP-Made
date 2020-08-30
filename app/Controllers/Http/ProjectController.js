@@ -1,7 +1,5 @@
 'use strict'
 
-const Projects = require('../../Services/Projects')
-
 /** @typedef {import('@adonisjs/framework/src/Request')} Request */
 /** @typedef {import('@adonisjs/framework/src/Response')} Response */
 /** @typedef {import('@adonisjs/framework/src/View')} View */
@@ -39,8 +37,11 @@ class ProjectController {
      * @param {Response} ctx.response
      * @param {View} ctx.view
      */
-    async create({ view }) {
+    async create({ view, guard, response }) {
         const categories = await ProjectCategory.all()
+        if(guard.denies('create', new Project())) {
+            return response.redirect('back')
+        }
 
         return view.render('project.create', {
             categories: categories.toJSON()
@@ -70,10 +71,10 @@ class ProjectController {
      * @param {Response} ctx.response
      * @param {View} ctx.view
      */
-    async show({ params, guard, view }) {
+    async show({ params, response, guard, view }) {
         const project = await Project.query().with('author').with('category').where('id', params.id).first()
         if (guard.denies('show', project)) {
-            return redirect('back')
+            return response.redirect('back')
         }
 
         return view.presenter('ShowProjectPresenter').render('project.show', {project})

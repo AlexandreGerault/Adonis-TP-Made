@@ -1,7 +1,7 @@
 'use strict'
 
 class ProjectPolicy {
-    index(user) {
+    index(user, project) {
         return true
     }
 
@@ -9,16 +9,12 @@ class ProjectPolicy {
         return project.is_published || project.author_id === user.id
     }
 
-    create(user) {
+    create(user, project) {
         return true
     }
 
     update(user, project) {
         return project.author_id === user.id
-    }
-
-    create(edit) {
-        
     }
 
     destroy(user, project) {
