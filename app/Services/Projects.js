@@ -33,6 +33,7 @@ class Projects {
         project.description = data.description
         project.rules = data.rules
         project.design_link = data.designUrl
+        project.is_published = data.published
         await project.save()
         project.author().associate(user)
         project.category().associate(category)
@@ -48,7 +49,8 @@ class Projects {
             name: data.projectName,
             design_link: data.designUrl,
             description: data.description,
-            rules: data.rules
+            rules: data.rules,
+            is_published: data.published ? true : false
         })
         await project.save()
         project.category().associate(category)

@@ -16,7 +16,8 @@ class StoreProject {
             projectType: 'required|number|exists:project_categories,id',
             designUrl: 'url|starts_with:https\://www.figma.com/file/',
             description: 'required|string',
-            rules: 'string'
+            rules: 'string',
+            published: 'boolean'
         }
     }
 

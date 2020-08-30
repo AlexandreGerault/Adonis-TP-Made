@@ -42,8 +42,17 @@
 
     <div>
         <label for="designInput">Lien vers la maquette du design</label>
-        <input type="url" name="designUrl" id="designInput" value="{{ project.design_link }}"/>
+        <input type="url" name="designUrl" id="designInput" value="{{ project.design_link ? project.design_link : ""}}"/>
     </div>
+
+    <label for="publishedInput">
+        <input id="publishedInput" type="checkbox" class="filled-in"
+        @if(project.is_published)
+        checked="checked"
+        @endif
+        name="published" value="true"/>
+        <span>Public</span>
+    </label>
 
     <div class="input-field">
         <label for="descriptionInput" class="label-relative">Description du TP</label>
@@ -52,7 +61,7 @@
 
     <div class="input-field">
         <label for="rulesInput" class="label-relative">Règles du TP</label>
-        <textarea name="rules" id="rulesInput" cols="30" rows="10" class="materialize-textarea">{{ project.rules }}</textarea>
+        <textarea name="rules" id="rulesInput" cols="30" rows="10" class="materialize-textarea">{{ project.rules ? project.rules : "" }}</textarea>
     </div>
 
     <button class="btn">Mettre à jour le TP</button>

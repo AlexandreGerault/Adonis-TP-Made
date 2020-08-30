@@ -22,9 +22,9 @@ class ProjectController {
      * @param {Response} ctx.response
      * @param {View} ctx.view
      */
-    async index({ request, view }) {
+    async index({ request, view, auth }) {
         const { page } = request.get('page', 1)
-        const projects = await Project.query().with('author').paginate(page, 5)
+        const projects = await Project.query().with('author').where('is_published', true).orWhere('author_id', auth.user.id).paginate(page, 5)
         return view.presenter('ProjectsListPresenter').render('project.index', { projects })
     }
 
