@@ -1,0 +1,47 @@
+@layout("layout")
+
+@section('title')
+  {{ project.name }}
+@endsection
+
+
+@section('body')
+<article>
+    <header class="row">
+        <h2 class="header">
+            {{ project.name }}
+            <span class="badge"><a href="/category/{{ category.id }}">{{ category.name }}</a></span>
+        </h2>
+        @can('update', project)
+        <a href="/projects/{{ project.id }}/edit" class="btn">Éditer le TP</a>
+        @endcan
+        <p>
+            Créé par {{ author.username }}
+        </p>
+    </header>
+
+    <!-- Resources -->
+    @if(project.design_link)
+        <a href="{{ project.design_link }}" class="collection-item">Maquette</a>
+    @endif
+
+    <div>
+        <h3>Énoncé</h3>
+        <p class="project__description">
+            {{{ project.description }}}
+        </p>
+    </div>
+
+
+    <div>
+        <h3>Règles</h3>
+        <p class="">
+            @if( project.rules )
+            {{ project.rules }}
+            @else
+            Aucune règle pour ce TP.
+            @endif
+        </p>
+    </div>
+</article>
+@endsection

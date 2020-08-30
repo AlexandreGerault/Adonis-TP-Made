@@ -1,0 +1,72 @@
+@layout('layout')
+
+@section('title')
+Créez votre propre TP
+@endsection
+
+@section('scripts')
+@super
+<script defer>
+    document.addEventListener('DOMContentLoaded', function() {
+        var elems = document.querySelectorAll('select')
+        var instances = M.FormSelect.init(elems, {})
+
+        var simplemde = new SimpleMDE({ element: document.getElementById("descriptionInput") })
+        var simplemde = new SimpleMDE({ element: document.getElementById("rulesInput") })
+    });
+
+
+</script>
+@endsection
+
+@section('body')
+<h1>Créer un nouveau TP</h1>
+<form method="post" action="/projects" enctype="multipart/form-data" class="row">
+    {{ csrfField() }}
+    <div>
+        <label for="nameInput">Nom du projet</label>
+        <input type="text" name="projectName" id="nameInput" />
+    </div>
+
+    <div class="input-field">
+        <select name="projectType" id="typeInput">
+            @each(category in categories)
+                <option value="{{ category.id }}">{{ category.name }}</option>
+            @endeach
+        </select>
+        <label for="typeInput">Type de projet</label>
+    </div>
+
+    <div>
+        <label for="designInput">Lien vers la maquette du design</label>
+        <input type="url" name="designUrl" id="designInput" />
+    </div>
+
+    <label for="publishedInput">
+        <input id="publishedInput" type="checkbox" class="filled-in" checked="checked" name="published" value="true"/>
+        <span>Public</span>
+    </label>
+
+    <div class="input-field">
+        <label for="descriptionInput" class="label-relative">Description du TP</label>
+        <textarea name="description" id="descriptionInput" cols="30" rows="10" class="materialize-textarea"></textarea>
+    </div>
+
+    <div class="input-field">
+        <label for="rulesInput" class="label-relative">Règles du TP</label>
+        <textarea name="rules" id="rulesInput" cols="30" rows="10" class="materialize-textarea"></textarea>
+    </div>
+
+    <div class="file-field input-field">
+        <div class="btn">
+            <span>Image du projet</span>
+            <input type="file" name="imageFile" id="imageInput">
+        </div>
+        <div class="file-path-wrapper">
+            <input class="file-path validate" type="text">
+        </div>
+    </div>
+
+    <button class="btn">Créer le TP</button>
+</form>
+@endsection
