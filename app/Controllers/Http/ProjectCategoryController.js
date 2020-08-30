@@ -32,7 +32,7 @@ class ProjectCategoryController {
      */
     async show({ params, auth, view }) {
         const category = await Category.query().with('projects', (builder) => {
-            builder.where('is_published', true).orWhere('author_id', auth.user.id)
+            builder.where('is_published', true).orWhere('author_id', auth.user ? auth.user.id : null)
         }).where('id', params.id).first()
         const projects = category.getRelated('projects')
 
