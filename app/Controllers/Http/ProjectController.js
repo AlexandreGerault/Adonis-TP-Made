@@ -73,9 +73,11 @@ class ProjectController {
      * @param {Response} ctx.response
      * @param {View} ctx.view
      */
-    async show({ params, response, guard, view }) {
-        const project = await Project.query().with('author').with('category').where('id', params.id).first()
-        if (!project.is_published && auth.user && project.author_id !== auth.user.id) {
+    async show({ params, response, auth, view }) {
+        const project = await Project.query().with('author').with('category').where('id', params.id).andWhere(function() {
+            this.where('is_published', true).orWhere('author_id', auth.user ? auth.user.id : null)
+        }).first()
+        if (!project) {
             return response.redirect('back')
         }
 
