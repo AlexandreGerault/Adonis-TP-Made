@@ -20,7 +20,8 @@ Créez votre propre TP
 @endsection
 
 @section('body')
-<form method="post" action="/projects" enctype="multipart/form-data">
+<h1>Créer un nouveau TP</h1>
+<form method="post" action="/projects" enctype="multipart/form-data" class="row">
     {{ csrfField() }}
     <div>
         <label for="nameInput">Nom du projet</label>
@@ -41,6 +42,11 @@ Créez votre propre TP
         <input type="url" name="designUrl" id="designInput" />
     </div>
 
+    <label for="publishedInput">
+        <input id="publishedInput" type="checkbox" class="filled-in" checked="checked" name="published" />
+        <span>Public</span>
+    </label>
+
     <div class="input-field">
         <label for="descriptionInput" class="label-relative">Description du TP</label>
         <textarea name="description" id="descriptionInput" cols="30" rows="10" class="materialize-textarea"></textarea>
@@ -51,9 +57,14 @@ Créez votre propre TP
         <textarea name="rules" id="rulesInput" cols="30" rows="10" class="materialize-textarea"></textarea>
     </div>
 
-    <div>
-        <label for="imageInput">Logo<label>
-        <input type="file" name="imageFile" id="imageInput">
+    <div class="file-field input-field">
+        <div class="btn">
+            <span>Image du projet</span>
+            <input type="file" name="imageFile" id="imageInput">
+        </div>
+        <div class="file-path-wrapper">
+            <input class="file-path validate" type="text">
+        </div>
     </div>
 
     <button class="btn">Créer le TP</button>

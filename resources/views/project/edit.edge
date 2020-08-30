@@ -19,7 +19,8 @@
 @endsection
 
 @section('body')
-<form method="post" action="/projects/{{ project.id }}?_method=PUT" enctype="multipart/form-data">
+<h1>Édition du TP</h1>
+<form method="post" action="/projects/{{ project.id }}?_method=PUT" enctype="multipart/form-data" class="row">
     {{ csrfField() }}
     <div>
         <label for="nameInput">Nom du projet</label>
