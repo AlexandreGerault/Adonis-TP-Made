@@ -8,6 +8,7 @@
 const ProjectService = use('ProjectService')
 const Project = use('App/Models/Project')
 const ProjectCategory = use('App/Models/ProjectCategory')
+const Logger = use('Logger')
 
 /**
  * Resourceful controller for interacting with projects
@@ -24,9 +25,8 @@ class ProjectController {
      */
     async index({ request, view, auth }) {
         const { page } = request.get('page', 1)
-        const projects = await Project.query().with('author').where(function() {
-            this.where('is_published', true).orWhere('author_id', auth.user ? auth.user.id : null)
-        }).paginate(page, 5)
+        const projects = await Project.query().with('author').published().orWhere('author_id', auth.user ? auth.user.id : null).paginate(page, 5)
+
         return view.presenter('ProjectsListPresenter').render('project.index', { projects })
     }
 
@@ -75,7 +75,7 @@ class ProjectController {
      */
     async show({ params, response, guard, view }) {
         const project = await Project.query().with('author').with('category').where('id', params.id).first()
-        if (guard.denies('show', project)) {
+        if (!project.is_published && auth.user && project.author_id !== auth.user.id) {
             return response.redirect('back')
         }
 

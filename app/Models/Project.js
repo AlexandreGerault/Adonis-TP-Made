@@ -11,6 +11,10 @@ class Project extends Model {
     author () {
         return this.belongsTo('App/Models/User', 'author_id', 'id')
     }
+
+    static scopePublished (query) {
+        return query.where('is_published', true)
+    }
 }
 
 module.exports = Project
