@@ -28,9 +28,23 @@
     
     <script defer>
         document.addEventListener('DOMContentLoaded', function() {
-            let elems = document.querySelectorAll('.dropdown-trigger');
-            let instances = M.Dropdown.init(elems, {
+            // Navbar for mobiles
+            let navbar = document.querySelectorAll('.sidenav');
+            let navbars = M.Sidenav.init(navbar, {
+
+            });
+
+            // Navar categories dropdown
+            let categoriesDropdown = document.querySelectorAll('.dropdown-trigger');
+            let categoriesDropdowns = M.Dropdown.init(categoriesDropdown, {
                 hover: true,
+                coverTrigger: false
+            });
+
+
+            // Navar categories dropdown with touch
+            let categoriesDropdownMobile = document.querySelectorAll('.dropdown-trigger-touch');
+            let categoriesDropdownsMobile = M.Dropdown.init(categoriesDropdownMobile, {
                 coverTrigger: false
             });
         });
@@ -41,7 +55,10 @@
     <nav>
         <div class="nav-wrapper">
             <a href="/" class="brand-logo">Made</a>
-            <ul id="nav-mobile" class="right hide-on-med-and-down">
+
+            <a href="#" data-target="mobile-sidebar" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+
+            <ul class="right hide-on-med-and-down">
                 <li><a class='dropdown-trigger' href='#' data-target='categories-dropdown'>Catégories</a></li>
                 <ul id='categories-dropdown' class='dropdown-content'>
                     @each(category in gCat().rows)
@@ -59,6 +76,23 @@
             </ul>
         </div>
       </nav>
+
+      <ul class="sidenav" id="mobile-sidebar">
+        <li><a class='dropdown-trigger-touch' href='#' data-target='categories-dropdown-mobile'>Catégories</a></li>
+        <ul id='categories-dropdown-mobile' class='dropdown-content'>
+            @each(category in gCat().rows)
+                <li><a href="/category/{{ category.id }}">{{ category.name }}</a></li>
+            @endeach
+          </ul>
+        <li><a href="/projects">Derniers TP</a></li>
+        @loggedIn
+            <li><a href="/projects/create">Créer un nouveau TP</a></li>
+            <li><a href="/logout">Déconnexion</a></li>
+        @else
+            <li><a href="/register">Inscription</a></li>
+            <li><a href="/login">Connexion</a></li>
+        @endloggedIn
+    </ul>
       <div class="container">
             @!section('body')
       </div>

@@ -5,31 +5,33 @@ Créez-vous un compte !
 @endsection
 
 @section('body')
-<div class="card">
-    <form method="POST" class="card-content">
-        <h2>Inscription</h2>
-        {{ csrfField() }}
-        <div>
-            <label for="usernameInput">Nom d'utilisateur</label>
-            <input type="text" name="username" id="usernameInput" />
-        </div>
-    
-        <div>
-            <label for="emailInput">Adresse mail</label>
-            <input type="email" name="email" id="emailInput" />
-        </div>
-    
-        <div>
-            <label for="passwordInput">Mot de passe</label>
-            <input type="password" name="password" id="passwordInput" />
-        </div>
-    
-        <div>
-            <label for="confirmationInput">Confirmation du mot de passe</label>
-            <input type="password" name="password_confirmation" id="confirmationInput" />
-        </div>
-    
-        <button class="btn">S'inscrire</button>
-    </form>
+<div class="row">
+    <div class="card col s12 l4 offset-l4">
+        <form method="POST" class="card-content">
+            <h2>Inscription</h2>
+            {{ csrfField() }}
+            <div>
+                <label for="usernameInput">Nom d'utilisateur</label>
+                <input type="text" name="username" id="usernameInput" />
+            </div>
+        
+            <div>
+                <label for="emailInput">Adresse mail</label>
+                <input type="email" name="email" id="emailInput" />
+            </div>
+        
+            <div>
+                <label for="passwordInput">Mot de passe</label>
+                <input type="password" name="password" id="passwordInput" />
+            </div>
+        
+            <div>
+                <label for="confirmationInput">Confirmation du mot de passe</label>
+                <input type="password" name="password_confirmation" id="confirmationInput" />
+            </div>
+        
+            <button class="btn">S'inscrire</button>
+        </form>
+    </div>
 </div>
 @endsection
