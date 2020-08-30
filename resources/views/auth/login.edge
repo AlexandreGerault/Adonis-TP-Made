@@ -13,6 +13,11 @@ Connectez-vous !
                     <h2 class="header">Connexion</h2>
                 </div>
                 {{ csrfField() }}
+                @if(flashMessage('error'))
+                <div class="errors">
+                    <p>{{ flashMessage('error') }}</p>
+                </div>
+                @endif
                 <div>
                     <label for="emailInput">Votre adresse de connexion</label>
                     <input type="email" name="email" id="emailInput" />

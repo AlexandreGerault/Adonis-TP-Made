@@ -13,21 +13,33 @@ Créez-vous un compte !
             <div>
                 <label for="usernameInput">Nom d'utilisateur</label>
                 <input type="text" name="username" id="usernameInput" />
+                @if(getErrorFor('username'))
+                <p>{{ getErrorFor('username') }}</p>
+                @endif
             </div>
         
             <div>
                 <label for="emailInput">Adresse mail</label>
                 <input type="email" name="email" id="emailInput" />
+                @if(getErrorFor('email'))
+                <p>{{ getErrorFor('email') }}</p>
+                @endif
             </div>
         
             <div>
                 <label for="passwordInput">Mot de passe</label>
                 <input type="password" name="password" id="passwordInput" />
+                @if(getErrorFor('password'))
+                <p>{{ getErrorFor('password') }}</p>
+                @endif
             </div>
         
             <div>
                 <label for="confirmationInput">Confirmation du mot de passe</label>
                 <input type="password" name="password_confirmation" id="confirmationInput" />
+                @if(getErrorFor('password_confirmation'))
+                <p>{{ getErrorFor('password_confirmation') }}</p>
+                @endif
             </div>
         
             <button class="btn">S'inscrire</button>

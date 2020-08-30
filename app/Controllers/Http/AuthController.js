@@ -12,7 +12,7 @@ class AuthController {
         try {
             await auth.attempt(email, password)
         } catch (exception) {
-            sessionStorage.flash({ error: 'Invalid credentials.' })
+            session.flash({ error: 'Invalid credentials.' })
 
             return response.redirect('login')
         }
@@ -33,7 +33,6 @@ class AuthController {
     async register ({ auth, request, response, session }) {
         const data = request.only(['username', 'email', 'password'])
         const newUser = await User.create(data)
-        console.log(request)
 
         await auth.login(newUser)
 
