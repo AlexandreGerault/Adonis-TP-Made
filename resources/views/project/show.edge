@@ -27,20 +27,22 @@
 
     <div>
         <h3>Énoncé</h3>
-        <p class="project__description">
-            {{{ project.description }}}
-        </p>
+        <article class="card">
+            <div class="card-content">{{{ project.description }}}</div>
+        </article>
     </div>
 
 
     <div>
         <h3>Règles</h3>
-        <p class="">
-            @if( project.rules )
-            {{ project.rules }}
-            @else
-            Aucune règle pour ce TP.
-            @endif
+        <article class="card">
+            <div class="card-content">
+                @if( project.rules )
+                {{ project.rules }}
+                @else
+                Aucune règle pour ce TP.
+                @endif
+            </div>
         </p>
     </div>
 </article>
